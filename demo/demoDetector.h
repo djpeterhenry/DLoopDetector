@@ -18,11 +18,11 @@
 #include <opencv/highgui.h>
 
 // DLoopDetector and DBoW2
-#include <DBoW2/DBoW2.h>
+#include <DBoW2.h>
 #include "DLoopDetector.h"
-#include <DUtils/DUtils.h>
-#include <DUtilsCV/DUtilsCV.h>
-#include <DVision/DVision.h>
+#include <DUtils.h>
+#include <DUtilsCV.h>
+#include <DVision.h>
 
 using namespace DLoopDetector;
 using namespace DBoW2;

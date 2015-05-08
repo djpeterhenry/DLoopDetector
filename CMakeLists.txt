@@ -1,6 +1,20 @@
 cmake_minimum_required(VERSION 2.8)
 project(DLoopDetector)
 
+# Peter for windows
+# boost
+if (MSVC)
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_RUNTIME OFF) # new idea for prebuilt version from boost.org?
+#find_package (Boost COMPONENTS thread system filesystem program_options serialization REQUIRED)
+find_package (Boost REQUIRED)
+IF (Boost_FOUND)
+	include_directories(${Boost_INCLUDE_DIR})
+	link_directories(${Boost_LIBRARY_DIRS})
+	add_definitions( "-DHAS_BOOST" ) # sure...
+ENDIF()
+endif()
+
 option(BUILD_DemoBRIEF  "Build demo application with BRIEF features" OFF)
 option(BUILD_DemoSURF   "Build demo application with SURF features"  OFF)
 
@@ -33,8 +47,14 @@ if(BUILD_DemoBRIEF OR BUILD_DemoSURF)
         message(FATAL_ERROR "Error downloading resources for demo applications")
       endif(${status})
     endif(NOT EXISTS ${RESOURCE_FILE})
-    execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${RESOURCE_FILE})
-    file(REMOVE ${RESOURCE_FILE})
+	# Peter
+	if (MSVC)
+	# somehow unztar from command line
+#    execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${RESOURCE_FILE})	
+	else()
+		execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${RESOURCE_FILE})
+		file(REMOVE ${RESOURCE_FILE})
+	endif()
   endif(NOT EXISTS ${CMAKE_BINARY_DIR}/resources/)
 endif(BUILD_DemoBRIEF OR BUILD_DemoSURF)
 

@@ -11,9 +11,9 @@
 #include <string>
 
 // DLoopDetector and DBoW2
-#include <DBoW2/DBoW2.h> // defines BriefVocabulary
+#include <DBoW2.h> // defines BriefVocabulary
 #include "DLoopDetector.h" // defines BriefLoopDetector
-#include <DVision/DVision.h> // Brief
+#include <DVision.h> // Brief
 
 // OpenCV
 #include <opencv/cv.h>
