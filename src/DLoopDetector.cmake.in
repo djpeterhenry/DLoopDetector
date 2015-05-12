@@ -1,6 +1,16 @@
+# peter for windows
+# note that here I don't think this actually exists!!
+IF (MSVC)
+FIND_LIBRARY(DLoopDetector_LIBRARY_Release DLoopDetector
+	PATHS @CMAKE_INSTALL_PREFIX@/lib)
+FIND_LIBRARY(DLoopDetector_LIBRARY_Debug DLoopDetector_d
+	PATHS @CMAKE_INSTALL_PREFIX@/lib)
+SET(DLoopDetector_LIBRARY optimized ${DLoopDetector_LIBRARY_Release} debug ${DLoopDetector_LIBRARY_Debug})
+ELSE()
 FIND_LIBRARY(DLoopDetector_LIBRARY DLoopDetector
     PATHS @CMAKE_INSTALL_PREFIX@/lib
 )
+ENDIF()
 FIND_PATH(DLoopDetector_INCLUDE_DIR DLoopDetectorConfig.cmake
     PATHS @CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME@ 
 )
